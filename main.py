@@ -5,41 +5,47 @@ Programa para Calcular el Indice de Masa Corporal
 """
 from tkinter import *
 from tkinter import messagebox
+import re
 
 
 # Funcion para calcular el IMC
 def Calculo_IMC():
+    try:
 
-    if (entry_peso.get() == "" and entry_estatura.get() == "") or\
-            (entry_peso.get() == "" or entry_estatura.get() == ""):
+        if (entry_peso.get() == "" and entry_estatura.get() == "") or\
+                (entry_peso.get() == "" or entry_estatura.get() == "") or\
+                (entry_peso.get() == " " or entry_estatura.get() == " "):
+            messagebox.showerror(title="Error de ingreso de datos",
+                                 message="Los campos estan vacios o ingreso un dato incorrecto")
+
+        if entry_peso.get() != "" and entry_estatura.get() != "":
+            peso = float(entry_peso.get())
+            estatura = float(entry_estatura.get())
+            imc = peso / (estatura * estatura)
+
+            if imc <= 18.49:
+                messagebox.showinfo(title="Por debajo del peso",
+                                    message="Debe cuidar su salud ya que esta por debajo del promedio")
+
+            elif 18.5 <= imc <= 24.9:
+                messagebox.showinfo(title="Saludable",
+                                    message="Usted es una persona muy saludable, su IMC se encuentra entre el promedio")
+
+            elif 25 <= imc <= 29.9:
+                messagebox.showinfo(title="Con sobrepeso",
+                                    message="Debe cuidar su salud ya que tiene sobrepeso y puede afectarle")
+
+            elif 30 <= imc <= 39.9:
+                messagebox.showinfo(title="Obeso",
+                                    message="Debe mejorar su salud ya que tiene problemas de obesidad")
+
+            elif imc >= 40:
+                messagebox.showinfo(title="Obesidad extrema o de alto riesgo",
+                                    message="Su salud esta en peligro, consulte a un profesional que le ayude")
+
+    except:
         messagebox.showerror(title="Error de ingreso de datos",
                              message="Los campos estan vacios o ingreso un dato incorrecto")
-
-    if entry_peso.get() != "" and entry_estatura.get() != "":
-        peso = float(entry_peso.get())
-        estatura = float(entry_estatura.get())
-        imc = peso / (estatura * estatura)
-
-        if imc <= 18.49:
-            messagebox.showinfo(title="Por debajo del peso",
-                                message="Debe cuidar su salud ya que esta por debajo del promedio")
-
-        elif 18.5 <= imc <= 24.9:
-            messagebox.showinfo(title="Saludable",
-                                message="Usted es una persona muy saludable, su IMC se encuentra entre el promedio")
-
-        elif 25 <= imc <= 29.9:
-            messagebox.showinfo(title="Con sobrepeso",
-                                message="Debe cuidar su salud ya que tiene sobrepeso y puede afectarle")
-
-        elif 30 <= imc <= 39.9:
-            messagebox.showinfo(title="Obeso",
-                                message="Debe mejorar su salud ya que tiene problemas de obesidad")
-
-        elif imc >= 40:
-            messagebox.showinfo(title="Obesidad extrema o de alto riesgo",
-                                message="Su salud esta en peligro, por favor consulte a un profesional que le ayude")
-
     entry_peso.delete(0, END)
     entry_estatura.delete(0, END)
 
