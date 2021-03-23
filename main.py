@@ -57,7 +57,7 @@ window.geometry("550x550")
 window.config(bg="lightblue")
 window.resizable(0, 0)
 
-bg_imagen = PhotoImage(file=r"C:\Users\hl586\OneDrive\Escritorio\Python\Proyecto#1\bg.png")
+bg_imagen = PhotoImage(file=r"bg.png")
 
 canvas1 = Canvas(window, width=500, height=500)
 canvas1.pack(fill="both", expand=True)
